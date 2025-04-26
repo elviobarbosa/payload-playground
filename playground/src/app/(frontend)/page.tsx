@@ -6,6 +6,9 @@ import { fileURLToPath } from 'url'
 
 import config from '@/payload.config'
 import './styles.css'
+import { Page } from '@/payload-types'
+import HeroBlock from './components/blocks/CoverBlock'
+import ContentBlock from './components/blocks/ContentBlock'
 
 export default async function HomePage() {
   const headers = await getHeaders()
@@ -15,45 +18,37 @@ export default async function HomePage() {
 
   const fileURL = `vscode://file/${fileURLToPath(import.meta.url)}`
 
+  const {
+    docs: [page],
+  } = await payload.find({
+    collection: 'pages',
+    where: {
+      slug: {
+        equals: 'teste',
+      },
+    },
+  })
+
+  if (!page) {
+    return <div>Page not found</div>
+  }
+
+  const renderBlocks = (block: Page['layout'][0]) => {
+    switch (block.blockType) {
+      case 'cover':
+        return <HeroBlock block={block} key={block.id} />
+      case 'content':
+        return <ContentBlock block={block} key={block.id} />
+      default:
+        return null
+    }
+  }
+
   return (
-    <div className="home">
-      <div className="content">
-        <picture>
-          <source srcSet="https://raw.githubusercontent.com/payloadcms/payload/main/packages/ui/src/assets/payload-favicon.svg" />
-          <Image
-            alt="Payload Logo"
-            height={65}
-            src="https://raw.githubusercontent.com/payloadcms/payload/main/packages/ui/src/assets/payload-favicon.svg"
-            width={65}
-          />
-        </picture>
-        {!user && <h1>Welcome to your new project.</h1>}
-        {user && <h1>Welcome back, {user.email}</h1>}
-        <div className="links">
-          <a
-            className="admin"
-            href={payloadConfig.routes.admin}
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            Go to admin panel
-          </a>
-          <a
-            className="docs"
-            href="https://payloadcms.com/docs"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            Documentation
-          </a>
-        </div>
-      </div>
-      <div className="footer">
-        <p>Update this page by editing</p>
-        <a className="codeLink" href={fileURL}>
-          <code>app/(frontend)/page.tsx</code>
-        </a>
-      </div>
+    <div>
+      <h1>{page.title}</h1>
+      <div className="page">{page.layout.map((block) => renderBlocks(block))}</div>
+      {/* <div dangerouslySetInnerHTML={{ __html: page.content }} /> */}
     </div>
   )
 }
