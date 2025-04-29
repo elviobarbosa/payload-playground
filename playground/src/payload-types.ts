@@ -197,6 +197,13 @@ export interface Page {
         blockName?: string | null;
         blockType: 'content';
       }
+    | {
+        heading?: string | null;
+        form?: (number | null) | Form;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'contact-form';
+      }
   )[];
   updatedAt: string;
   createdAt: string;
@@ -524,6 +531,14 @@ export interface PagesSelect<T extends boolean = true> {
           | {
               heading?: T;
               content?: T;
+              id?: T;
+              blockName?: T;
+            };
+        'contact-form'?:
+          | T
+          | {
+              heading?: T;
+              form?: T;
               id?: T;
               blockName?: T;
             };

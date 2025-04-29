@@ -18,7 +18,7 @@
     "@payloadcms/db-sqlite": "3.33.0",
     "@payloadcms/next": "3.33.0",
     "@payloadcms/payload-cloud": "3.33.0",
-    "@payloadcms/plugin-form-builder": "^3.35.1",
+    "@payloadcms/plugin-form-builder": "^3.33.0",
     "@payloadcms/richtext-lexical": "^3.33.0",
     "graphql": "^16.8.1",
     "next": "15.3.0",

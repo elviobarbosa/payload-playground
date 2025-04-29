@@ -9,6 +9,7 @@ import './styles.css'
 import { Page } from '@/payload-types'
 import HeroBlock from './components/blocks/CoverBlock'
 import ContentBlock from './components/blocks/ContentBlock'
+import ContactFormBlock from './components/blocks/ContactFormBlock'
 
 export default async function HomePage() {
   const headers = await getHeaders()
@@ -39,6 +40,8 @@ export default async function HomePage() {
         return <HeroBlock block={block} key={block.id} />
       case 'content':
         return <ContentBlock block={block} key={block.id} />
+      case 'contact-form':
+        return <ContactFormBlock block={block} key={block.id} />
       default:
         return null
     }

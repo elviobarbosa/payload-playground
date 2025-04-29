@@ -1,5 +1,6 @@
 import { ContentBlock } from '@/blocks/ContentBlock'
 import { CoverBlock } from '@/blocks/CoverBlock'
+import { FormBlock } from '@/blocks/FormBlock'
 import { CollectionConfig } from 'payload'
 
 const Pages: CollectionConfig = {
@@ -19,7 +20,7 @@ const Pages: CollectionConfig = {
       name: 'layout',
       type: 'blocks',
       required: true,
-      blocks: [CoverBlock, ContentBlock],
+      blocks: [CoverBlock, ContentBlock, FormBlock],
     },
   ],
 }

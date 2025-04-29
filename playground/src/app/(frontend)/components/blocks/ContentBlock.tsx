@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Page } from '@/payload-types'
 import { RichText } from '@payloadcms/richtext-lexical/react'
 
